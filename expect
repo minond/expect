@@ -54,12 +54,14 @@ expect() {
             ;;
     esac
 
-    # TAP header
+    # TAP version and plan
     if [ "$EXPECT_OUTPUT_HEADER_DONE" -eq 0 ]; then
+        echo "TAP version 13"
         echo "1..$EXPECT_TOTAL_TEST_COUNT"
         EXPECT_OUTPUT_HEADER_DONE=1
     fi
 
+    # TAP test line
     if [ "$test_outcome" -eq 0 ]; then
         echo "ok $EXPECT_TEST_COUNT $description"
     else
@@ -67,7 +69,7 @@ expect() {
         EXPECT_FAILED_TESTS+=($EXPECT_TEST_COUNT)
     fi
 
-    # TAP footer
+    # TAP failed summary
     if [ "$EXPECT_TOTAL_TEST_COUNT" -eq "$EXPECT_TEST_COUNT" ] && [ ${#EXPECT_FAILED_TESTS[@]} -ne 0 ]; then
         local save_ifs=$IFS
         local failed_tests_count=$((EXPECT_FAILED_TESTS))
