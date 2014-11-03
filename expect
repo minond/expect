@@ -1,0 +1,84 @@
+#!/bin/bash
+
+#==============================================================================
+#         FILE: expect
+#  DESCRIPTION: basic assertion method for bash, with TAP output. for info
+#               on TAP, visit http://podwiki.hexten.net/TAP/TAP.html
+#        USAGE: see usage function
+#==============================================================================
+
+EXPECT_OUTPUT_HEADER_DONE=0
+EXPECT_FAILED_TESTS=()
+EXPECT_TEST_COUNT=0
+EXPECT_TOTAL_TEST_COUNT=$(grep -c "expect " < "$0")
+
+xpect() {
+    return 0
+}
+
+#=== FUNCTION =================================================================
+#        NAME:
+# DESCRIPTION:
+# PARAMETER 1: command* to execute
+# PARAMETER 2: test_type to pass, to fail
+#==============================================================================
+expect() {
+    local exit_code=$?
+    local description=''
+
+    # arg parsing
+    local command_len=$((${#}-2))
+    local command=${*:1:$command_len}
+    local test_type=${*:$command_len+1:2}
+
+    # # 1 = fail, 0 = pass
+    local test_outcome=1
+
+    if [ ! -z "$command" ]; then
+        eval "$command" &> /dev/null
+        exit_code=$?
+        description="- \$($command)"
+    fi
+
+    EXPECT_TEST_COUNT=$((EXPECT_TEST_COUNT + 1))
+
+    case "$test_type" in
+        'to pass')
+            test "$exit_code" -eq 0
+            test_outcome=$?
+            ;;
+
+        'to fail')
+            test "$exit_code" -ne 0
+            test_outcome=$?
+            ;;
+    esac
+
+    # TAP header
+    if [ "$EXPECT_OUTPUT_HEADER_DONE" -eq 0 ]; then
+        echo "1..$EXPECT_TOTAL_TEST_COUNT"
+        EXPECT_OUTPUT_HEADER_DONE=1
+    fi
+
+    if [ "$test_outcome" -eq 0 ]; then
+        echo "ok $EXPECT_TEST_COUNT $description"
+    else
+        echo "not ok $EXPECT_TEST_COUNT $description"
+        EXPECT_FAILED_TESTS+=($EXPECT_TEST_COUNT)
+    fi
+
+    # TAP footer
+    if [ "$EXPECT_TOTAL_TEST_COUNT" -eq "$EXPECT_TEST_COUNT" ] && [ ${#EXPECT_FAILED_TESTS[@]} -ne 0 ]; then
+        local save_ifs=$IFS
+        local failed_tests_count=$((EXPECT_FAILED_TESTS))
+        local failed_percentage=$(echo "scale=2; $failed_tests_count * 100 / $EXPECT_TOTAL_TEST_COUNT" | bc)
+        local failed_fraction="$failed_tests_count/$EXPECT_TOTAL_TEST_COUNT"
+
+        IFS=","
+        local failed_list="${EXPECT_FAILED_TESTS[*]}"
+        IFS=$save_ifs
+
+        echo "FAILED tests $failed_list"
+        echo "Failed $failed_fraction tests, $failed_percentage% okay"
+    fi
+}
