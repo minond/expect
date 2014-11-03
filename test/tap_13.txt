@@ -1,8 +1,10 @@
 TAP version 13
 1..6
 ok 1 
-ok 2 
+not ok 2 
 ok 3 
 ok 4 
 ok 5 - $(echo run this command)
 ok 6 - $(this will not work because this is not a command)
+FAILED tests 2
+Failed 2/6 tests, 33.33% okay

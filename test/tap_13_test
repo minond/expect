@@ -1,5 +1,7 @@
 #!/bin/bash
 
+touch Makefile.win
 [ ! -d build ] && mkdir build
 bash test/pass_fail_test &> ./build/tap_13_output
+rm Makefile.win
 diff ./build/tap_13_output ./test/tap_13.txt &> /dev/null
