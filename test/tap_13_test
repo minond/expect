@@ -1,0 +1,5 @@
+#!/bin/bash
+
+[ ! -d build ] && mkdir build
+bash test/pass_fail_test &> ./build/tap_13_output
+diff ./build/tap_13_output ./test/tap_13.txt &> /dev/null

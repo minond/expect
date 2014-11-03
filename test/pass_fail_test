@@ -1,0 +1,12 @@
+#!/bin/bash
+
+source expect
+
+expect $(test -f Makefile) to pass
+expect $(test -f Makefile.win) to fail
+
+expect $(exit 1) to fail
+expect $(exit 0) to pass
+
+expect "echo run this command" to pass
+expect "this will not work because this is not a command" to fail

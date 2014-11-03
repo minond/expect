@@ -82,5 +82,7 @@ expect() {
 
         echo "FAILED tests $failed_list"
         echo "Failed $failed_fraction tests, $failed_percentage% okay"
+
+        exit 1
     fi
 }
