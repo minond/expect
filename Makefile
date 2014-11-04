@@ -14,3 +14,6 @@ lint:
 
 install:
 	ln -s $(shell pwd)/expect /usr/local/bin/expect
+
+deps:
+	sudo apt-get install bc
