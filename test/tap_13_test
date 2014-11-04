@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 touch Makefile.win
 [ ! -d build ] && mkdir build
 bash test/pass_fail_test &> ./build/tap_13_output
