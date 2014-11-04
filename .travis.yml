@@ -3,6 +3,9 @@ language: haskell
 ghc:
   - 7.6
 
+before_script:
+  - sudo apt-get install diffutils
+
 install:
   - cabal install shellcheck
 
