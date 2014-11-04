@@ -1,0 +1,10 @@
+language: haskell
+
+ghc:
+  - 7.6
+
+before_script:
+  - cabal install shellcheck
+
+script:
+  - make

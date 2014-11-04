@@ -1,5 +1,4 @@
-expect
-======
+[![Build Status](https://travis-ci.org/minond/expect.svg)](https://travis-ci.org/minond/expect)
 
 `expect` - a simple test method for bash scripts with valid TAP v13 output
 
