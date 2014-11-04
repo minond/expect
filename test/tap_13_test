@@ -6,4 +6,12 @@ touch Makefile.win
 [ ! -d build ] && mkdir build
 bash test/pass_fail_test &> ./build/tap_13_output
 rm Makefile.win
+
+echo ================= build =================
+cat ./build/tap_13_output
+
+echo ================= tests =================
+cat ./test/tap_13.txt
+
+echo ================= diff  =================
 diff ./build/tap_13_output ./test/tap_13.txt &> /dev/null
