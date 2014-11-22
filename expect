@@ -28,7 +28,6 @@ EXPECT_OUTPUT_TYPE=tap
 
     EXPECT_TEST_COUNT=$((EXPECT_TEST_COUNT + 1))
     output:result skip "$EXPECT_TEST_COUNT" "$description" "$reason"
-    [ 0 ]
 }
 
 #=== FUNCTION =================================================================
