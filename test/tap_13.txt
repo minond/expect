@@ -1,10 +1,6 @@
 TAP version 13
-1..5
+1..0
 ok 1 - the file to exist
-ok 2 - the file to not exist
+not ok 2 - the file to not exist
 ok 3 - this to exit with 0
 ok 4 - output to do something
-not ok 5 - this to fail
-
-FAILED tests 5
-Failed 5/5 tests, 100.00% okay
