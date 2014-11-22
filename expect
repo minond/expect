@@ -126,4 +126,10 @@ tests:counter() {
     ))
 }
 
-tests:counter "$0"
+for file in "$@"; do
+    tests:counter "$file"
+done
+
+for file in "$@"; do
+    source "$file"
+done
