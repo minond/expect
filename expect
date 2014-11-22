@@ -12,8 +12,8 @@ EXPECT_FAILED_TESTS=()
 EXPECT_TEST_COUNT=0
 
 EXPECT_TOTAL_TEST_COUNT=$((
-    $(grep -cx "^-expect " < "$0") +
-    $(grep -cx "^expect " < "$0")
+    $(grep -c "^-expect " < "$0") +
+    $(grep -c "^expect " < "$0")
 ))
 
 #=== FUNCTION =================================================================
@@ -60,8 +60,8 @@ expect() {
     # TAP failed summary
     if [ "$EXPECT_TOTAL_TEST_COUNT" -eq "$EXPECT_TEST_COUNT" ] && [ ${#EXPECT_FAILED_TESTS[@]} -ne 0 ]; then
         local save_ifs=$IFS
-        local failed_tests_count=$((EXPECT_FAILED_TESTS))
-        local failed_percentage=$(echo "scale=2; $failed_tests_count * 100 / $EXPECT_TOTAL_TEST_COUNT" | bc)
+        local failed_tests_count="${#EXPECT_FAILED_TESTS[@]}"
+        local failed_percentage=$(echo "scale=2; 100 - $failed_tests_count * 100 / $EXPECT_TOTAL_TEST_COUNT" | bc)
         local failed_fraction="$failed_tests_count/$EXPECT_TOTAL_TEST_COUNT"
 
         IFS=","
