@@ -120,6 +120,7 @@ output:footer() {
 tests:counter() {
     local file=$1
     EXPECT_TOTAL_TEST_COUNT=$((
+        EXPECT_TOTAL_TEST_COUNT +
         $(grep -c "^-expect " < "$file") +
         $(grep -c "^expect " < "$file")
     ))
