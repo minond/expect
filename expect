@@ -17,12 +17,15 @@ EXPECT_TOTAL_TEST_COUNT=0
 #        NAME: -expect
 # DESCRIPTION: an assert method
 # PARAMETER 1: test description
-# PARAMETER 2: test exit code (defaults to last exit code)
+# PARAMETER 2: test exit code (ignored)
+# PARAMETER 3: reason for skipping test
 #==============================================================================
 -expect() {
     local description=$1
+    local reason=$2
+    [ ! -z "$3" ] && reason=$3
     EXPECT_TEST_COUNT=$((EXPECT_TEST_COUNT + 1))
-    echo "ok $EXPECT_TEST_COUNT - $description # skip"
+    echo "ok $EXPECT_TEST_COUNT - $description # SKIP $reason"
     return 0
 }
 
@@ -37,11 +40,12 @@ expect() {
     local description=$1
     [ ! -z "$2" ] && exit_code=$2
 
+
     EXPECT_TEST_COUNT=$((EXPECT_TEST_COUNT + 1))
     output:header
 
     # TAP test line
-    if [[ "$exit_code" -eq 0 ]]; then
+    if [[ "$exit_code" -eq "0" ]]; then
         echo "ok $EXPECT_TEST_COUNT - $description"
     else
         echo "not ok $EXPECT_TEST_COUNT - $description"
@@ -49,7 +53,7 @@ expect() {
     fi
 
     output:footer
-    return $exit_code
+    [ "$exit_code" ]
 }
 
 #=== FUNCTION =================================================================
