@@ -100,7 +100,8 @@ output:footer() {
         local failed_list=
 
         IFS=","
-        failed_list="${EXPECT_FAILED_TESTS[*]//,/, }"
+        failed_list="${EXPECT_FAILED_TESTS[*]}"
+        failed_list="${failed_list//,/, }"
         IFS=$save_ifs
 
         echo
