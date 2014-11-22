@@ -2,11 +2,8 @@
 
 source expect
 
-expect $(test -f Makefile) to pass
-expect $(test -f Makefile.win) to fail
-
-expect $(exit 1) to fail
-expect $(exit 0) to pass
-
-expect "echo run this command" to pass
-expect "this will not work because this is not a command" to fail
+expect "the file to exist" $(test -f Makefile)
+expect "the file to not exist" $(test -f Makefile.win)
+expect "this to exit with 0" $(exit 0)
+expect "output to do something" $(echo hi)
+expect "this to fail" $(exit 1)
