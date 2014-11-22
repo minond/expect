@@ -68,6 +68,7 @@ expect() {
         local failed_list="${EXPECT_FAILED_TESTS[*]}"
         IFS=$save_ifs
 
+        echo
         echo "FAILED tests $failed_list"
         echo "Failed $failed_fraction tests, $failed_percentage% okay"
 

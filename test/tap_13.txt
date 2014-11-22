@@ -1,10 +1,10 @@
 TAP version 13
-1..6
-ok 1 
-not ok 2 
-ok 3 
-ok 4 
-ok 5 - $(echo run this command)
-ok 6 - $(this will not work because this is not a command)
-FAILED tests 2
-Failed 2/6 tests, 33.33% okay
+1..5
+ok 1 - the file to exist
+ok 2 - the file to not exist
+ok 3 - this to exit with 0
+ok 4 - output to do something
+not ok 5 - this to fail
+
+FAILED tests 5
+Failed 5/5 tests, 100.00% okay
