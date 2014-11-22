@@ -3,7 +3,8 @@
 #==============================================================================
 #         FILE: expect
 #  DESCRIPTION: basic assertion method for bash, with TAP output. for info
-#               on TAP, visit http://podwiki.hexten.net/TAP/TAP.html
+#               on TAP, visit http://podwiki.hexten.net/TAP/TAP.html and
+#               http://testanything.org/tap-specification.html
 #        USAGE: see usage function
 #==============================================================================
 
@@ -72,9 +73,10 @@ output:footer() {
         local failed_tests_count="${#EXPECT_FAILED_TESTS[@]}"
         local failed_percentage=$(echo "scale=2; 100 - $failed_tests_count * 100 / $EXPECT_TOTAL_TEST_COUNT" | bc)
         local failed_fraction="$failed_tests_count/$EXPECT_TOTAL_TEST_COUNT"
+        local failed_list=
 
         IFS=","
-        local failed_list="${EXPECT_FAILED_TESTS[*]}"
+        failed_list="${EXPECT_FAILED_TESTS[*]//,/, }"
         IFS=$save_ifs
 
         echo
