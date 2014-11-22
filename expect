@@ -49,6 +49,26 @@ expect() {
     fi
 
     output:footer
+    return $exit_code
+}
+
+#=== FUNCTION =================================================================
+#        NAME: bail_out
+# DESCRIPTION: stop execution of script
+# PARAMETER 1: message/reason of bail out
+#==============================================================================
+bail_out() {
+    echo "Bail out! $1"
+    exit 1
+}
+
+#=== FUNCTION =================================================================
+#        NAME: bail_out
+# DESCRIPTION: output a helper message
+# PARAMETER 1: message/diagnostic
+#==============================================================================
+diagnostic() {
+    echo "# $1"
 }
 
 #=== FUNCTION =================================================================
