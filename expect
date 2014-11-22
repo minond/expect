@@ -10,11 +10,7 @@
 EXPECT_OUTPUT_HEADER_DONE=0
 EXPECT_FAILED_TESTS=()
 EXPECT_TEST_COUNT=0
-
-EXPECT_TOTAL_TEST_COUNT=$((
-    $(grep -c "^-expect " < "$0") +
-    $(grep -c "^expect " < "$0")
-))
+EXPECT_TOTAL_TEST_COUNT=0
 
 #=== FUNCTION =================================================================
 #        NAME: -expect
@@ -41,13 +37,7 @@ expect() {
     [ ! -z "$2" ] && exit_code=$2
 
     EXPECT_TEST_COUNT=$((EXPECT_TEST_COUNT + 1))
-
-    # TAP version and plan
-    if [ "$EXPECT_OUTPUT_HEADER_DONE" -eq 0 ]; then
-        echo "TAP version 13"
-        echo "1..$EXPECT_TOTAL_TEST_COUNT"
-        EXPECT_OUTPUT_HEADER_DONE=1
-    fi
+    tap:header
 
     # TAP test line
     if [[ "$exit_code" -eq 0 ]]; then
@@ -57,7 +47,26 @@ expect() {
         EXPECT_FAILED_TESTS+=($EXPECT_TEST_COUNT)
     fi
 
-    # TAP failed summary
+    tap:footer
+}
+
+#=== FUNCTION =================================================================
+#        NAME: tap:header
+# DESCRIPTION: TAP version and plan
+#==============================================================================
+tap:header() {
+    if [ "$EXPECT_OUTPUT_HEADER_DONE" -eq 0 ]; then
+        echo "TAP version 13"
+        echo "1..$EXPECT_TOTAL_TEST_COUNT"
+        EXPECT_OUTPUT_HEADER_DONE=1
+    fi
+}
+
+#=== FUNCTION =================================================================
+#        NAME: tap:footer
+# DESCRIPTION: TAP failed tests summary
+#==============================================================================
+tap:footer() {
     if [ "$EXPECT_TOTAL_TEST_COUNT" -eq "$EXPECT_TEST_COUNT" ] && [ ${#EXPECT_FAILED_TESTS[@]} -ne 0 ]; then
         local save_ifs=$IFS
         local failed_tests_count="${#EXPECT_FAILED_TESTS[@]}"
@@ -75,3 +84,18 @@ expect() {
         exit 1
     fi
 }
+
+#=== FUNCTION =================================================================
+#        NAME: tap:counter
+# DESCRIPTION: TAP failed tests summary
+# PARAMETER 1: file to count tests in
+#==============================================================================
+tap:counter() {
+    local file=$1
+    EXPECT_TOTAL_TEST_COUNT=$((
+        $(grep -c "^-expect " < "$file") +
+        $(grep -c "^expect " < "$file")
+    ))
+}
+
+tap:counter "$0"
