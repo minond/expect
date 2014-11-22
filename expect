@@ -12,7 +12,7 @@ EXPECT_FAILED_TESTS=()
 EXPECT_TEST_COUNT=0
 
 EXPECT_TOTAL_TEST_COUNT=$((
-    $(grep -c "-expect " < "$0") +
+    $(grep -cx "^-expect " < "$0") +
     $(grep -cx "^expect " < "$0")
 ))
 
