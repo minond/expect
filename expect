@@ -57,6 +57,7 @@ expect() {
 
     EXPECT_TEST_COUNT=$((EXPECT_TEST_COUNT + 1))
     output:header
+    tear_down
 
     if [[ "$exit_code" -eq "0" ]]; then
         output:result pass "$EXPECT_TEST_COUNT" "$description"
@@ -66,6 +67,7 @@ expect() {
     fi
 
     output:footer
+    set_up
     [ "$exit_code" ]
 }
 
@@ -91,6 +93,22 @@ diagnostic() {
     case "$EXPECT_OUTPUT_TYPE" in
         tap) echo "# $1" ;;
     esac
+}
+
+#=== FUNCTION =================================================================
+#        NAME: set_up
+# DESCRIPTION: called before every test
+#==============================================================================
+set_up() {
+    return 0
+}
+
+#=== FUNCTION =================================================================
+#        NAME: tear_down
+# DESCRIPTION: called after every test
+#==============================================================================
+tear_down() {
+    return 0
 }
 
 #=== FUNCTION =================================================================
