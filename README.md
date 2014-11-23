@@ -2,11 +2,11 @@
 
 `expect` - a simple test method for bash scripts with valid TAP v13 output
 
-##### install
+#### install
 
 clone this repo and run `make install` (you may need to sudo that)
 
-##### example
+#### example
 
 here's an example test file. let's say you named it under `test/random_tests`:
 
@@ -17,11 +17,11 @@ expect "this to exit with 0" $(exit 0)
 expect "output to do something" $(echo hi)
 ```
 
-##### running tests
+#### running tests
 
 to run the above example, just execute `expect test/random_tests`
 
-##### output
+#### output
 
 default output is not TAP. to get tap output pass a `-o tap` argument when
 running your tests: `expect test/random_tests -o tap`
