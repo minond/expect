@@ -13,6 +13,19 @@ EXPECT_FAILED_TESTS=()
 EXPECT_TEST_COUNT=0
 EXPECT_TOTAL_TEST_COUNT=0
 EXPECT_OUTPUT_TYPE=tap
+EXPECT_TEST_FILES=()
+
+#=== FUNCTION =================================================================
+#        NAME: usage
+#==============================================================================
+usage() {
+    local file=$(basename "$0")
+    echo "Usage: $file [options] [FILE [FILE2 [...]]]"
+    echo
+    echo "options:"
+    echo "  - output | o    - specify output format"
+    echo "  - help | h      - see this help text"
+}
 
 #=== FUNCTION =================================================================
 #        NAME: -expect
@@ -168,10 +181,34 @@ tests:counter() {
     ))
 }
 
-for file in "$@"; do
-    tests:counter "$file"
+while [ "$1" != "" ]; do
+    case $1 in
+        -o|--output)
+            shift
+            EXPECT_OUTPUT_TYPE="$1"
+            ;;
+
+        -h|--help)
+            usage
+            exit
+            ;;
+
+        *)
+            if [ -f "$1" ]; then
+                EXPECT_TEST_FILES+=("$1")
+                tests:counter "$1"
+            else
+                echo "invalid option: $1"
+                echo
+                usage
+                exit 1
+            fi
+            ;;
+    esac
+
+    shift
 done
 
-for file in "$@"; do
+for file in "${EXPECT_TEST_FILES[@]}"; do
     source "$file"
 done
