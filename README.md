@@ -2,31 +2,28 @@
 
 `expect` - a simple test method for bash scripts with valid TAP v13 output
 
-example:
+##### install
+
+clone this repo and run `make install` (you may need to sudo that)
+
+##### example
+
+here's an example test file. let's say you named it under `test/random_tests`:
 
 ```bash
 #!/bin/bash
 
-source expect
-
-expect $(test -f Makefile) to pass
-expect $(test -f Makefile.win) to fail
-
-expect $(exit 1) to fail
-expect $(exit 0) to pass
-
-expect "echo run this command" to pass
-expect "this will not work because this is not a command" to fail
+expect "the file to exist" $(test -f Makefile)
+expect "the file to not exist" $(test ! -f Makefile.win)
+expect "this to exit with 0" $(exit 0)
+expect "output to do something" $(echo hi)
 ```
 
-outputs:
+##### running tests
 
-```text
-1..6
-ok 1
-ok 2
-ok 3
-ok 4
-ok 5 - $(echo run this command)
-ok 6 - $(this will not work because this is not a command)
-```
+to run the above example, just execute `expect test/random_tests`
+
+##### output
+
+default output is not TAP. to get tap output pass a `-o tap` argument when
+running your tests: `expect test/random_tests -o tap`

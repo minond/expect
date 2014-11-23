@@ -13,7 +13,7 @@ lint:
 	shellcheck expect
 
 install:
-	ln -s $(shell pwd)/expect /usr/local/bin/expect
+	cp $(shell pwd)/expect /usr/local/bin/expect
 
 deps:
 	sudo apt-get install bc
