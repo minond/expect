@@ -2,6 +2,6 @@
 
 touch Makefile.win
 [ ! -d build ] && mkdir build
-./expect test/pass_fail_test &> ./build/tap_13_output
+./expect test/pass_fail_test -o tap &> ./build/tap_13_output
 rm Makefile.win
 diff ./build/tap_13_output ./test/tap_13.txt &> /dev/null

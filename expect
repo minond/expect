@@ -12,7 +12,7 @@ EXPECT_OUTPUT_HEADER_DONE=0
 EXPECT_FAILED_TESTS=()
 EXPECT_TEST_COUNT=0
 EXPECT_TOTAL_TEST_COUNT=0
-EXPECT_OUTPUT_TYPE=tap
+EXPECT_OUTPUT_TYPE=pretty
 EXPECT_TEST_FILES=()
 
 #=== FUNCTION =================================================================
@@ -119,9 +119,9 @@ output:result() {
 
         pretty)
             case "$result" in
-                fail) echo "  $(tput bold)$(tput setaf 1)✕$(tput sgr0) $(tput setaf 7)$description$(tput sgr0)" ;;
-                pass) echo "  $(tput bold)$(tput setaf 2)✓$(tput sgr0) $(tput setaf 7)$description$(tput sgr0)" ;;
-                skip) echo "  $(tput bold)$(tput setaf 3)-$(tput sgr0) $(tput setaf 7)$description$(tput sgr0)" ;;
+                fail) echo "    $(tput bold)$(tput setaf 1)✕$(tput sgr0) $(tput setaf 7)$description$(tput sgr0)" ;;
+                pass) echo "    $(tput bold)$(tput setaf 2)✓$(tput sgr0) $(tput setaf 7)$description$(tput sgr0)" ;;
+                skip) echo "    $(tput bold)$(tput setaf 3)-$(tput sgr0) $(tput setaf 7)$description$(tput sgr0)" ;;
             esac
 
             ;;
@@ -135,10 +135,6 @@ output:result() {
 output:header() {
     if [ "$EXPECT_OUTPUT_HEADER_DONE" -eq 0 ]; then
         case "$EXPECT_OUTPUT_TYPE" in
-            pretty)
-                echo
-                ;;
-
             tap)
                 echo "TAP version 13"
                 echo "1..$EXPECT_TOTAL_TEST_COUNT"
@@ -148,6 +144,22 @@ output:header() {
 
         EXPECT_OUTPUT_HEADER_DONE=1
     fi
+}
+
+#=== FUNCTION =================================================================
+#        NAME: output:group
+# PARAMETER 1: group name
+#==============================================================================
+output:group() {
+    local name=$1
+
+    case "$EXPECT_OUTPUT_TYPE" in
+        pretty)
+            echo
+            echo "  $(tput bold)$name$(tput sgr0):"
+            # echo "  $(tput setaf 5)$name$(tput sgr0):"
+            ;;
+    esac
 }
 
 #=== FUNCTION =================================================================
@@ -230,5 +242,7 @@ while [ "$1" != "" ]; do
 done
 
 for file in "${EXPECT_TEST_FILES[@]}"; do
+    output:header
+    output:group "$file"
     source "$file"
 done

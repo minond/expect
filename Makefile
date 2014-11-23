@@ -6,7 +6,7 @@ clean:
 	rm -r build
 
 test:
-	./expect test/pass_fail_test
+	./expect test/pass_fail_test --output tap
 	bash test/tap_13_test
 
 lint:
