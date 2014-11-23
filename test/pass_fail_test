@@ -1,19 +1,6 @@
 #!/bin/bash
 
-name=
-
-set_up() {
-    name="Marcos"
-}
-
-tear_down() {
-    name=
-}
-
-echo "name: $name"
-expect "the file to exist" $(test "Marcos" = "Marcos")
-echo "name: $name"
 expect "the file to exist" $(test -f Makefile)
-# expect "the file to not exist" $(test ! -f Makefile.win)
-# expect "this to exit with 0" $(exit 0)
-# expect "output to do something" $(echo hi)
+expect "the file to not exist" $(test ! -f Makefile.win)
+expect "this to exit with 0" $(exit 0)
+expect "output to do something" $(echo hi)
