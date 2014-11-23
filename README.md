@@ -11,8 +11,6 @@ clone this repo and run `make install` (you may need to sudo that)
 here's an example test file. let's say you named it under `test/random_tests`:
 
 ```bash
-#!/bin/bash
-
 expect "the file to exist" $(test -f Makefile)
 expect "the file to not exist" $(test ! -f Makefile.win)
 expect "this to exit with 0" $(exit 0)
