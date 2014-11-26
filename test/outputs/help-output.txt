@@ -1,0 +1,12 @@
+Usage: expect [options] [FILE [FILE2 [...]]]
+
+options:
+  - output | o    - specify output format
+  - help | h      - see this help text
+
+flags:
+  - no-color      - no color output
+
+output options:
+  - pretty        - nice colored output (default)
+  - tap           - TAP v13 output

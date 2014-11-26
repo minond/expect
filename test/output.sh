@@ -17,6 +17,7 @@ done
 pretty_output=$(./expect "${test_file}_"* -o pretty --no-color)
 tap_output=$(./expect "${test_file}_"* -o tap)
 error_output=$(./expect "invalid does not exists")
+help_output=$(./expect -h)
 
 check_output() {
     local label="$1"
@@ -34,3 +35,4 @@ check_output() {
 check_output tap "test/outputs/tap-output.txt" "$tap_output"
 check_output pretty "test/outputs/pretty-output.txt" "$pretty_output"
 check_output error "test/outputs/error-output.txt" "$error_output"
+check_output help "test/outputs/help-output.txt" "$help_output"
