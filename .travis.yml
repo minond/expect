@@ -4,8 +4,7 @@ ghc:
   - 7.6
 
 before_script:
-  - sudo apt-get install diffutils
-  - sudo make deps
+  - sudo make dependecies
 
 install:
   - cabal install shellcheck

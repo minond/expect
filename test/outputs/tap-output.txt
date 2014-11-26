@@ -1,0 +1,35 @@
+TAP version 13
+1..30
+ok 1 - this will be skipped - SKIP hi
+not ok 2 - this will fail
+ok 3 - this fill pass
+ok 4 - this will be skipped - SKIP hi
+not ok 5 - this will fail
+ok 6 - this fill pass
+ok 7 - this will be skipped - SKIP hi
+not ok 8 - this will fail
+ok 9 - this fill pass
+ok 10 - this will be skipped - SKIP hi
+not ok 11 - this will fail
+ok 12 - this fill pass
+ok 13 - this will be skipped - SKIP hi
+not ok 14 - this will fail
+ok 15 - this fill pass
+ok 16 - this will be skipped - SKIP hi
+not ok 17 - this will fail
+ok 18 - this fill pass
+ok 19 - this will be skipped - SKIP hi
+not ok 20 - this will fail
+ok 21 - this fill pass
+ok 22 - this will be skipped - SKIP hi
+not ok 23 - this will fail
+ok 24 - this fill pass
+ok 25 - this will be skipped - SKIP hi
+not ok 26 - this will fail
+ok 27 - this fill pass
+ok 28 - this will be skipped - SKIP hi
+not ok 29 - this will fail
+ok 30 - this fill pass
+
+FAILED tests 2, 5, 8, 11, 14, 17, 20, 23, 26, 29
+Failed 10/30 tests, 66.67% okay

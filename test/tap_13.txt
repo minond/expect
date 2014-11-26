@@ -1,9 +1,0 @@
-TAP version 13
-1..4
-ok 1 - the file to exist
-not ok 2 - the file to not exist
-ok 3 - this to exit with 0
-ok 4 - output to do something
-
-FAILED tests 2
-Failed 1/4 tests, 75.00% okay

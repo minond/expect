@@ -6,14 +6,13 @@ clean:
 	rm -r build
 
 test:
-	./expect test/pass_fail_test --output tap
-	bash test/tap_13_test
+	@bash test/output.sh
 
 lint:
 	shellcheck expect
 
-install:
+install: dependecies
 	cp $(shell pwd)/expect /usr/local/bin/expect
 
-deps:
+dependecies:
 	sudo apt-get install bc
