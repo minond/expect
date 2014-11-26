@@ -6,7 +6,7 @@ clean:
 	rm -r build
 
 test:
-	@bash test/output.sh
+	bash test/output.sh
 
 lint:
 	shellcheck expect

@@ -14,6 +14,7 @@ EXPECT_TEST_COUNT=0
 EXPECT_TOTAL_TEST_COUNT=0
 EXPECT_OUTPUT_TYPE=pretty
 EXPECT_TEST_FILES=()
+tput=tput
 
 #=== FUNCTION =================================================================
 #        NAME: usage
@@ -25,6 +26,13 @@ usage() {
     echo "options:"
     echo "  - output | o    - specify output format"
     echo "  - help | h      - see this help text"
+    echo
+    echo "flags:"
+    echo "  - no-color      - no color output"
+    echo
+    echo "output options:"
+    echo "  - pretty        - nice colored output (default)"
+    echo "  - tap           - TAP v13 output"
 }
 
 #=== FUNCTION =================================================================
@@ -137,9 +145,9 @@ output:result() {
 
         pretty)
             case "$result" in
-                fail) echo "    $(tput bold)$(tput setaf 1)✕$(tput sgr0) $(tput setaf 7)$description$(tput sgr0)" ;;
-                pass) echo "    $(tput bold)$(tput setaf 2)✓$(tput sgr0) $(tput setaf 7)$description$(tput sgr0)" ;;
-                skip) echo "    $(tput bold)$(tput setaf 3)-$(tput sgr0) $(tput setaf 7)$description$(tput sgr0)" ;;
+                fail) echo "    $($tput bold)$($tput setaf 1)✕$($tput sgr0) $($tput setaf 7)$description$($tput sgr0)" ;;
+                pass) echo "    $($tput bold)$($tput setaf 2)✓$($tput sgr0) $($tput setaf 7)$description$($tput sgr0)" ;;
+                skip) echo "    $($tput bold)$($tput setaf 3)-$($tput sgr0) $($tput setaf 7)$description$($tput sgr0)" ;;
             esac
 
             ;;
@@ -174,8 +182,7 @@ output:group() {
     case "$EXPECT_OUTPUT_TYPE" in
         pretty)
             echo
-            echo "  $(tput bold)$name$(tput sgr0):"
-            # echo "  $(tput setaf 5)$name$(tput sgr0):"
+            echo "  $($tput bold)$name$($tput sgr0):"
             ;;
     esac
 }
@@ -233,6 +240,10 @@ tests:counter() {
 
 while [ "$1" != "" ]; do
     case $1 in
+        --no-color)
+            tput=:
+            ;;
+
         -o|--output)
             shift
             EXPECT_OUTPUT_TYPE="$1"

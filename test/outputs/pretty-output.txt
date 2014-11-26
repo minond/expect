@@ -1,41 +1,41 @@
 
-  [1mtest/temp_output_test_file_1[m:
-    [1m[33m-[m [37mthis will be skipped[m
-    [1m[31m✕[m [37mthis will fail[m
-    [1m[32m✓[m [37mthis fill pass[m
-    [1m[33m-[m [37mthis will be skipped[m
-    [1m[31m✕[m [37mthis will fail[m
-    [1m[32m✓[m [37mthis fill pass[m
+  test/temp_output_test_file_1:
+    - this will be skipped
+    ✕ this will fail
+    ✓ this fill pass
+    - this will be skipped
+    ✕ this will fail
+    ✓ this fill pass
 
-  [1mtest/temp_output_test_file_2[m:
-    [1m[33m-[m [37mthis will be skipped[m
-    [1m[31m✕[m [37mthis will fail[m
-    [1m[32m✓[m [37mthis fill pass[m
-    [1m[33m-[m [37mthis will be skipped[m
-    [1m[31m✕[m [37mthis will fail[m
-    [1m[32m✓[m [37mthis fill pass[m
+  test/temp_output_test_file_2:
+    - this will be skipped
+    ✕ this will fail
+    ✓ this fill pass
+    - this will be skipped
+    ✕ this will fail
+    ✓ this fill pass
 
-  [1mtest/temp_output_test_file_3[m:
-    [1m[33m-[m [37mthis will be skipped[m
-    [1m[31m✕[m [37mthis will fail[m
-    [1m[32m✓[m [37mthis fill pass[m
-    [1m[33m-[m [37mthis will be skipped[m
-    [1m[31m✕[m [37mthis will fail[m
-    [1m[32m✓[m [37mthis fill pass[m
+  test/temp_output_test_file_3:
+    - this will be skipped
+    ✕ this will fail
+    ✓ this fill pass
+    - this will be skipped
+    ✕ this will fail
+    ✓ this fill pass
 
-  [1mtest/temp_output_test_file_4[m:
-    [1m[33m-[m [37mthis will be skipped[m
-    [1m[31m✕[m [37mthis will fail[m
-    [1m[32m✓[m [37mthis fill pass[m
-    [1m[33m-[m [37mthis will be skipped[m
-    [1m[31m✕[m [37mthis will fail[m
-    [1m[32m✓[m [37mthis fill pass[m
+  test/temp_output_test_file_4:
+    - this will be skipped
+    ✕ this will fail
+    ✓ this fill pass
+    - this will be skipped
+    ✕ this will fail
+    ✓ this fill pass
 
-  [1mtest/temp_output_test_file_5[m:
-    [1m[33m-[m [37mthis will be skipped[m
-    [1m[31m✕[m [37mthis will fail[m
-    [1m[32m✓[m [37mthis fill pass[m
-    [1m[33m-[m [37mthis will be skipped[m
-    [1m[31m✕[m [37mthis will fail[m
-    [1m[32m✓[m [37mthis fill pass[m
+  test/temp_output_test_file_5:
+    - this will be skipped
+    ✕ this will fail
+    ✓ this fill pass
+    - this will be skipped
+    ✕ this will fail
+    ✓ this fill pass
 

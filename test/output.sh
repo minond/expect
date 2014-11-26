@@ -14,7 +14,7 @@ expect "this fill pass" \$(exit 0)
 TEXT
 done
 
-pretty_output=$(./expect "${test_file}_"* -o pretty)
+pretty_output=$(./expect "${test_file}_"* -o pretty --no-color)
 tap_output=$(./expect "${test_file}_"* -o tap)
 
 check_output() {
@@ -23,14 +23,12 @@ check_output() {
     local test_run_output_str="$3"
 
     if ! test "$(cat "$expected_output_file")" = "$test_run_output_str"; then
-        echo "    $(tput bold)$(tput setaf 1)✕$(tput sgr0) $(tput setaf 7)$label output does not match$(tput sgr0)"
+        echo "$label looks broken!!"
         exit 1
     else
-        echo "    $(tput bold)$(tput setaf 2)✓$(tput sgr0) $(tput setaf 7)$label output looks ok$(tput sgr0)"
+        echo "$label looks good"
     fi
 }
 
-echo
 check_output tap "test/outputs/tap-output.txt" "$tap_output"
 check_output pretty "test/outputs/pretty-output.txt" "$pretty_output"
-echo
