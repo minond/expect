@@ -16,6 +16,7 @@ done
 
 pretty_output=$(./expect "${test_file}_"* -o pretty --no-color)
 tap_output=$(./expect "${test_file}_"* -o tap)
+error_output=$(./expect "invalid does not exists")
 
 check_output() {
     local label="$1"
@@ -23,12 +24,13 @@ check_output() {
     local test_run_output_str="$3"
 
     if ! test "$(cat "$expected_output_file")" = "$test_run_output_str"; then
-        echo "$label looks broken!!"
+        echo "$label output looks broken!!"
         exit 1
     else
-        echo "$label looks good"
+        echo "$label output looks good"
     fi
 }
 
 check_output tap "test/outputs/tap-output.txt" "$tap_output"
 check_output pretty "test/outputs/pretty-output.txt" "$pretty_output"
+check_output error "test/outputs/error-output.txt" "$error_output"
